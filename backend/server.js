@@ -13,35 +13,43 @@ const socketHandlers = require('./socket/socketHandlers');
 const app = express();
 const server = http.createServer(app);
 
-// const io = socketIO(server, {
-    // cors: {
-        // origin: process.env.CLIENT_URL,
-//         methods: ["GET", "POST"]
-//     }
-// });
+// CORS configuration - UPDATE THIS
+const allowedOrigins = [
+    'https://collaborative-task-board-blush.vercel.app',
+    'http://localhost:3000',
+    process.env.CLIENT_URL
+].filter(Boolean); // Remove any undefined values
 
-// Middleware
-// app.use(cors({
-//     origin: process.env.CLIENT_URL,
-//     credentials: true
-// }));
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
 
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('Origin not allowed by CORS:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-// In server.js, update CORS configuration
+// Apply CORS middleware BEFORE routes
+app.use(cors(corsOptions));
+app.use(express.json());
+
+// Socket.IO with CORS
 const io = socketIO(server, {
     cors: {
-        origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
+        origin: allowedOrigins,
         methods: ["GET", "POST"],
         credentials: true
     }
 });
 
-app.use(cors({
-    origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
-    credentials: true
-}));
-
-app.use(express.json());
 // Database connection
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -61,6 +69,7 @@ socketHandlers(io);
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log('Allowed origins:', allowedOrigins);
 });
 
 // Make io accessible in other files

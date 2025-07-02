@@ -12,20 +12,36 @@ const socketHandlers = require('./socket/socketHandlers');
 
 const app = express();
 const server = http.createServer(app);
+
+// const io = socketIO(server, {
+    // cors: {
+        // origin: process.env.CLIENT_URL,
+//         methods: ["GET", "POST"]
+//     }
+// });
+
+// Middleware
+// app.use(cors({
+//     origin: process.env.CLIENT_URL,
+//     credentials: true
+// }));
+
+
+// In server.js, update CORS configuration
 const io = socketIO(server, {
     cors: {
-        origin: process.env.CLIENT_URL,
-        methods: ["GET", "POST"]
+        origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
-// Middleware
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: [process.env.CLIENT_URL, 'http://localhost:3000'],
     credentials: true
 }));
-app.use(express.json());
 
+app.use(express.json());
 // Database connection
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,

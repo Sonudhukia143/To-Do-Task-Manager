@@ -1,7 +1,9 @@
-# Backend
-backend/node_modules/
-backend/.env
-backend/logs/
+# server
+server/node_modules/
+server/.env
+server/logs/
+server/package-lock.json
+server/logs/
 
 # Frontend
 frontend/node_modules/

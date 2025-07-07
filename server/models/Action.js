@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const actionSchema = new mongoose.Schema({
     userId: {
@@ -25,4 +25,4 @@ const actionSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Action', actionSchema);
+export default mongoose.model('Action', actionSchema);

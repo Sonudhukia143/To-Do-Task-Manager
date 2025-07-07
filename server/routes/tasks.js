@@ -1,8 +1,10 @@
-const router = require('express').Router();
-const Task = require('../models/Task');
-const User = require('../models/User');
-const Action = require('../models/Action');
-const auth = require('../middleware/auth');
+import express from 'express';
+import Task from '../models/Task.js';
+import User from '../models/User.js';
+import Action from '../models/Action.js';
+import auth from '../middleware/auth.js';
+
+const router = express.Router();
 
 // Get all tasks
 router.get('/', auth, async (req, res) => {
@@ -299,4 +301,4 @@ router.post('/:id/smart-assign', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

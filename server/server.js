@@ -1,14 +1,15 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const http = require('http');
-const socketIO = require('socket.io');
-require('dotenv').config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import http from 'http';
+import { Server as socketIO } from 'socket.io';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.js';
+import taskRoutes from './routes/tasks.js';
+import actionRoutes from './routes/actions.js';
+import socketHandlers from './socket/socketHandlers.js';
 
-const authRoutes = require('./routes/auth');
-const taskRoutes = require('./routes/tasks');
-const actionRoutes = require('./routes/actions');
-const socketHandlers = require('./socket/socketHandlers');
+dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
@@ -42,7 +43,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Socket.IO with CORS
-const io = socketIO(server, {
+const io = new socketIO(server, {
     cors: {
         origin: allowedOrigins,
         methods: ["GET", "POST"],

@@ -1,8 +1,10 @@
-const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const auth = require('../middleware/auth');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import auth from '../middleware/auth.js';
+
+const router = express.Router();
 
 // Register
 router.post('/register', async (req, res) => {
@@ -115,7 +117,6 @@ router.get('/verify', async (req, res) => {
     }
 });
 
-// Add this route at the end of routes/auth.js before module.exports
 // Get all users (for assignment dropdown)
 router.get('/users', auth, async (req, res) => {
   try {
@@ -126,5 +127,4 @@ router.get('/users', auth, async (req, res) => {
   }
 });
 
-
-module.exports = router;
+export default router;

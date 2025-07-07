@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const Task = require('../models/Task');
-const Action = require('../models/Action');
+import jwt from 'jsonwebtoken';
+import Task from '../models/Task.js';
+import Action from '../models/Action.js';
 
-module.exports = (io) => {
+const socketHandlers = (io) => {
     // Middleware for socket authentication
     io.use((socket, next) => {
         const token = socket.handshake.auth.token;
@@ -105,3 +105,5 @@ module.exports = (io) => {
         });
     });
 };
+
+export default socketHandlers;

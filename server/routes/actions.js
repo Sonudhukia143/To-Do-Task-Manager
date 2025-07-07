@@ -1,6 +1,8 @@
-const router = require('express').Router();
-const Action = require('../models/Action');
-const auth = require('../middleware/auth');
+import express from 'express';
+import Action from '../models/Action.js';
+import auth from '../middleware/auth.js';
+
+const router = express.Router();
 
 // Get last 20 actions
 router.get('/', auth, async (req, res) => {
@@ -16,4 +18,4 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

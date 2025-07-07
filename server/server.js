@@ -15,7 +15,7 @@ const server = http.createServer(app);
 
 // CORS configuration - UPDATE THIS
 const allowedOrigins = [
-    'https://collaborative-task-board-blush.vercel.app',
+    'https://dotasker.netlify.app',
     'http://localhost:5173',
     process.env.CLIENT_URL
 ].filter(Boolean); // Remove any undefined values

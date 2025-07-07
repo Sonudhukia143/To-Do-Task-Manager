@@ -111,7 +111,7 @@ const KanbanBoard = ({ tasks, onConflict }) => {
             </div>
 
             <DragDropContext onDragEnd={onDragEnd}>
-                <div className="columns-container">
+                <div className="columns-container" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', overflowX: 'scroll'}}>
                     {Object.values(columns).map(column => (
                         <Droppable key={column.id} droppableId={column.id}>
                             {(provided, snapshot) => (

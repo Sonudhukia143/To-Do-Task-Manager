@@ -1,0 +1,97 @@
+.user-registration {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, #23232b 0%, #18181b 100%);
+}
+
+.user-registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 350px;
+    width: 100%;
+    max-width: 420px;
+    margin: 2rem 0;
+    background: rgba(14,14,16,0.98);
+    border-radius: 18px;
+    box-shadow: 0 4px 32px 0 rgba(0,0,0,0.7);
+    border: 1.5px solid rgba(255,255,255,0.04);
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+}
+
+.user-registration-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.user-registration-tab {
+    flex: 1;
+    padding: 0.8rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 2.5px solid transparent;
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom 0.2s;
+    outline: none;
+}
+.user-registration-tab.active {
+    color: #00ffe7;
+    border-bottom: 2.5px solid #00ffe7;
+    background: none;
+}
+.user-registration-tab:disabled {
+    cursor: default;
+    opacity: 0.7;
+}
+
+.user-registration-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 480px) {
+    .user-registration-container {
+        min-width: unset;
+        padding: 1rem 0.3rem;
+    }
+    .user-registration-tabs {
+        gap: 0.5rem;
+    }
+    .user-registration-tab {
+        font-size: 1rem;
+        padding: 0.6rem 0;
+    }
+}
+
+.user-registration-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    text-shadow: 0 2px 8px #00ffe733;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
